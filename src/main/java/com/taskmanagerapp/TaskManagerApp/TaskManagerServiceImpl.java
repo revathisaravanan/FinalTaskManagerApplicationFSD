@@ -46,8 +46,9 @@ public class TaskManagerServiceImpl implements TaskManagerService {
     /* (non-Javadoc)
      * @see com.fsd.taskmanager.TaskManagerService#deleteTask(com.fsd.taskmanager.Task)
      */
-    public String deleteTask(Task task) {
-        taskDaoImpl.deleteTask(task);
+    public String endTask(Task task) {
+        //taskDaoImpl.deleteTask(task);
+        taskDaoImpl.addOrMergeTask(task);
         return "Deleted";
     }
 }

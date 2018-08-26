@@ -8,14 +8,16 @@ import java.util.Date;
 public class TaskManagerJSON {
 
     private int taskId;
-    private int ParentId;
-    private String task;
-    private String parentTask;
+    //private int ParentId;
+    private String taskName;
+    private String parentTaskName;
+//    private String parentTask;
     //@JsonFormat(shape=JsonFormat.Shape.OBJECT, pattern="yyyy-MM-dd")
     private Date startDate;
     //@JsonFormat(shape=JsonFormat.Shape.OBJECT, pattern="yyyy-MM-dd")
     private Date endDate;
     private int priority;
+    private String status;
 
     public int getTaskId() {
         return taskId;
@@ -23,24 +25,18 @@ public class TaskManagerJSON {
     public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
-    public int getParentId() {
-        return ParentId;
-    }
-    public void setParentId(int parentId) {
-        ParentId = parentId;
-    }
-    public String getTask() {
-        return task;
-    }
-    public void setTask(String task) {
-        this.task = task;
-    }
-    public String getParentTask() {
-        return parentTask;
-    }
-    public void setParentTask(String parentTask) {
-        this.parentTask = parentTask;
-    }
+//    public int getParentId() {
+//        return ParentId;
+//    }
+//    public void setParentId(int parentId) {
+//        ParentId = parentId;
+//    }
+    //    public String getParentTask() {
+//        return parentTask;
+//    }
+//    public void setParentTask(String parentTask) {
+//        this.parentTask = parentTask;
+//    }
     public Date getStartDate() {
         return startDate;
     }
@@ -58,5 +54,29 @@ public class TaskManagerJSON {
     }
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public String getParentTaskName() {
+        return parentTaskName;
+    }
+
+    public void setParentTaskName(String parentTaskName) {
+        this.parentTaskName = parentTaskName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

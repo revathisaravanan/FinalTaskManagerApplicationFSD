@@ -1,0 +1,57 @@
+<form id="addTask" ng-controller="TaskManagerController" ng-app ="TaskManagement">
+    <div class="form-group">
+        <div class="row p-3">
+            <label class="col-md-3 p-3 text-right" for="taskName">Task</label>
+            <input class="col-md-3 p-3 form-control form-control-lg"
+                   id="taskName" type="text" placeholder="Task's Name"
+                   ng-model="task.taskName">
+            <div class="alert alert-danger ml-5 p-2" role="alert" ng-show="taskNameRequired">
+                <span class="col-md-3 p-3 text-left">{{taskNameRequired}}</span>
+            </div>
+        </div>
+        <div class="row p-3">
+            <label class="col-md-3 p-3 text-right" for="priority">Priority</label>
+            <div class="col-md-2 pt-3">
+                <input class="form-control-range slider"
+                       type="range" id="priority" min="0" max="30"
+                       ng-model="task.priority">
+            </div>
+            <div class="col-md-1 pt-3 text-center">
+                <span>{{task.priority}}</span>
+            </div>
+            <div class="alert alert-danger ml-5 p-2" role="alert" ng-show="priorityRequired">
+                <span class="col-md-3 p-3 text-left">{{priorityRequired}}</span>
+            </div>
+        </div>
+        <div class="row p-3">
+            <label class="col-md-3 p-3 text-right" for="parentTaskName">Parent Task</label>
+            <input class="col-md-3 p-3 form-control form-control-lg"
+                   id="parentTaskName" type="text" placeholder="Parent Task's Name"
+                   ng-model="task.parentTaskName">
+        </div>
+        <div class="row pt-3 pl-2">
+            <label class="col-md-3 p-3 text-right" for="startDate">Start Date</label>
+            <input class="col-md-3 p-3 form-control form-control-lg"
+                   id="startDate" type="date" placeholder="Start Date"
+                   ng-model="task.startDate">
+            <div class="alert alert-danger ml-5 p-2" role="alert" ng-show="startDateRequired">
+                <span class="col-md-3 p-3 text-left">{{startDateRequired}}</span>
+            </div>
+        </div>
+        <div class="row pt-3 pl-2">
+            <label class="col-md-3 p-3 text-right" for="endDate">End Date</label>
+            <input class="col-md-3 p-3 form-control form-control-lg"
+                   id="endDate" type="date" placeholder="End Date"
+                   ng-model="task.endDate">
+            <div class="alert alert-danger ml-5 p-2" role="alert" ng-show="endDateRequired">
+                <span class="col-md-3 text-left align-middle">{{endDateRequired}}</span>
+            </div>
+
+        </div>
+        <div class="row p-3 text-center">
+            <span class="col-md-3 p-3 text-right"></span>
+            <button type="button" ng-click="saveTask()" class="btn btn-outline-dark">Add Task</button>
+            <button type="button" ng-click="reset()" class="btn btn-outline-danger ml-lg-3">Reset</button>
+        </div>
+    </div>
+</form>

@@ -5,8 +5,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-;
+
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository("TaskDao")
@@ -101,7 +104,13 @@ public class TaskDaoImpl implements TaskDao{
         Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
         List<Task> taskList = null;
         try{
-            taskList = session.createCriteria(Task.class).list();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Task> query = criteriaBuilder.createQuery(Task.class);
+            Root<Task> root = query.from(Task.class);
+            query.select(root);
+            taskList = session.createQuery(query).getResultList();
+
+            //taskList = session.createCriteria(Task.class).list();
         }catch (Exception e) {
             throw new RuntimeException("Exception occured in getAllTask",e);
         }

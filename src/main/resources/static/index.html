@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TaskManagement">
+<head>
+    <meta charset="UTF-8">
+    <title>#NeverForgetAgain</title>
+    <!-- Twitter Bootstrap CDN -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <!-- AngularJS -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6 p-3 bg-dark text-center">
+        <a class="text-white" href="#/add">Add Tasks</a>
+    </div>
+    <div class="col-md-6 p-3 bg-light text-center">
+        <a class="text-dark" href="#/view" >View Tasks</a>
+    </div>
+</div>
+<div ng-view></div>
+<script src="js/index.js"></script>
+</body>
+</html>

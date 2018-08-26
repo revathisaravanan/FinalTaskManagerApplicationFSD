@@ -1,0 +1,85 @@
+<form id="viewTask" ng-controller="TaskManagerController" ng-app ="TaskManagement">
+    <div class="form-group">
+        <div class="row p-3">
+            <label class="col-md-2 text-right">Task</label>
+            <input class="col-md-2 form-control" type="text" placeholder="Task's Name" ng-model="task.taskName">
+            <label class="col-md-2 text-right">Parent Task</label>
+            <input class="col-md-2 form-control" type="text" placeholder="Parent Task's Name"
+                   ng-model="task.parentTaskName">
+        </div>
+        <div class="row p-3">
+            <label class="col-md-2 text-right">Priority From</label>
+            <input class="col-xl-1 form-control" type="number" min="0" max="30" placeholder="Start"
+                   ng-model="min_priority">
+            <label class="col-md-1 text-right">Priority To</label>
+            <input class="col-xl-1 form-control" type="number" min="0" max="30" placeholder="End"
+                   ng-model="max_priority">
+            <label class="col-md-1 text-right">Start Date</label>
+            <input class="col-md-2 form-control" type="text" placeholder="Start Date" ng-model="filterStartDate">
+            <label class="col-md-1 text-right">End Date</label>
+            <input class="col-md-2 form-control" type="text" placeholder="Start Date" ng-model="filterEndDate">
+        </div>
+        <div class="row">
+            <table class="table col-md-11 ml-5 table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Parent</th>
+                    <th scope="col">Priority Range (1-30)</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="task in tasks
+                    | orderBy:sortType:sortReverse
+                    | filter : task
+                    | range:min_priority:max_priority
+                    | dateRange:filterStartDate:filterEndDate ">
+                    <td class="col-xs-1 pt-4">
+                        {{task.taskId}}
+                    </td>
+                    <td class="pt-4">
+                        <input name="taskName{{task.taskId}}" ng-model="task.taskName"
+                               ng-disabled="!enableEdit[{{task.taskId}}]"/>
+                    </td>
+                    <td class="pt-4">
+                        <input name="parentTaskName{{task.taskId}}" ng-model="task.parentTaskName"
+                               ng-disabled="!enableEdit[{{task.parentTaskName}}]"/>
+                    </td>
+                    <td class="pt-4">
+                        <input class="form-control-range slider"
+                               type="range" id="priority" min="0" max="30"
+                               ng-model="task.priority" ng-show="enableEdit[{{task.taskId}}]">
+                        <div class="text-center">
+                            <span>{{task.priority}}</span>
+                        </div>
+                    </td>
+                    <td class="pt-4">
+                        {{task.startDate | date : 'MM/dd/yyyy'}}
+                        <!--<input name="startDate{{task.taskId}}" type="date"
+                               ng-model="task.endDate"
+                               ng-disabled="!enableEdit[{{task.taskId}}]"/>-->
+                        <!--ng-model="task.startDate"-->
+                    </td>
+                    <td class="pt-4">
+                        {{task.endDate | date : 'MM/dd/yyyy'}}
+                        <!--<input name="endDate{{task.taskId}}" type="date"
+                               ng-model="task.endDate | date : 'MM/dd/yyyy'"
+                               ng-disabled="!enableEdit[{{task.taskId}}]"/>-->
+                    </td>
+                    <td>
+                        <div class="row text-center">
+                            <button type="button" ng-click="editTask(task.taskId)" class="btn btn-outline-dark">Edit
+                            </button>
+                            <button type="button" class="btn btn-outline-danger ml-lg-3" ng-click="endTask(task.taskId)">End Task</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>

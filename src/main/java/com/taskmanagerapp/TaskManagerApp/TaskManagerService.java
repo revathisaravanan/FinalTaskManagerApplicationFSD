@@ -6,5 +6,5 @@ public interface TaskManagerService {
     String addTask(Task task);
     String updateTask(Task task);
     List<Task> getTaskList();
-    String deleteTask(Task task);
+    String endTask(Task task);
 }
