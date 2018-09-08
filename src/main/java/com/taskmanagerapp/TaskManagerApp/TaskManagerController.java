@@ -8,8 +8,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-//Commented by Revathi @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowedHeaders="*")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
+@RequestMapping(value = "/tasks")
 public class TaskManagerController {
 
         @Autowired
@@ -23,11 +24,12 @@ public class TaskManagerController {
          * @return
          * @throws ParseException
          */
-        @RequestMapping(value = "/taskManagercreateTask", method = RequestMethod.POST, headers = "Accept=application/json")
+        //@RequestMapping(value = "/taskManagercreateTask", method = RequestMethod.POST, headers = "Accept=application/json")
         //@PostMapping
-       public String createTask(@RequestBody TaskManagerJSON taskManageJSON) {
+        @RequestMapping(method = RequestMethod.POST)
+        public String createTask(@RequestBody TaskManagerJSON taskManageJSON) {
         //public String createTask(@RequestBody Task task) throws ParseException{
-
+            System.out.println("Im here inside create task" + taskManageJSON.getTaskName());
             //Create task and parent task entity object
             Task task = new Task();
             //Commented by Revathi
@@ -68,8 +70,9 @@ public class TaskManagerController {
      * This method is to derive the list of task
      * @return taskManageJSONList
      */
-     @RequestMapping(value = "/getAllTask", method = RequestMethod.GET, headers = "Accept=application/json")
-     public List<TaskManagerJSON> getTaskList(Model model){
+    // @RequestMapping(value = "/getAllTask", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(method = RequestMethod.GET)
+     public List<TaskManagerJSON> getTaskList(){
          //Create taskManagerJSON list object
          List<TaskManagerJSON> taskManageJSONList = new ArrayList<TaskManagerJSON>();
          List<Task> listOfTask = taskManageService.getTaskList();
@@ -97,6 +100,31 @@ public class TaskManagerController {
          //model.addAttribute("listOfTasks", taskManageJSONList);
          return taskManageJSONList;
      }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public String updateTask(@RequestBody TaskManagerJSON taskManageJSON) {
+        System.out.println("update task");
+        Task task = new Task();
+        task.setTaskId(taskManageJSON.getTaskId());
+        task.setTaskName(taskManageJSON.getTaskName());
+        task.setParentTask(taskManageJSON.getParentTaskName());
+        //Get the sql date from the util date object
+        java.sql.Date sqlStartDate = new java.sql.Date(taskManageJSON.getStartDate().getTime());
+        java.sql.Date sqlEndDate = new java.sql.Date(taskManageJSON.getEndDate().getTime());
+        task.setStartDate(sqlStartDate);
+        task.setEndDate(sqlEndDate);
+        task.setPriority(taskManageJSON.getPriority());
+        if (taskManageJSON.getEndTask() != null && taskManageJSON.getEndTask().equalsIgnoreCase("yes")) {
+            task.setStatus("InActive");
+        }
+        else {
+            task.setStatus("Active");
+        }
+        status = taskManageService.updateTask(task);
+        System.out.println("After updating in table......" + status);
+        return status;
+    }
+
 
     @RequestMapping(value = "/endTaskManager/{taskId}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public String endTask(@PathVariable int taskId) {

@@ -1,5 +1,6 @@
 package com.taskmanagerapp.TaskManagerApp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
@@ -12,12 +13,13 @@ public class TaskManagerJSON {
     private String taskName;
     private String parentTaskName;
 //    private String parentTask;
-    //@JsonFormat(shape=JsonFormat.Shape.OBJECT, pattern="yyyy-MM-dd")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date startDate;
-    //@JsonFormat(shape=JsonFormat.Shape.OBJECT, pattern="yyyy-MM-dd")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date endDate;
     private int priority;
     private String status;
+    private String endTask;
 
     public int getTaskId() {
         return taskId;
@@ -78,5 +80,13 @@ public class TaskManagerJSON {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getEndTask() {
+        return endTask;
+    }
+
+    public void setEndTask(String endTask) {
+        this.endTask = endTask;
     }
 }
