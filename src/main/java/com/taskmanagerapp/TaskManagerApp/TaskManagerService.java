@@ -3,8 +3,6 @@ package com.taskmanagerapp.TaskManagerApp;
 import java.util.List;
 
 public interface TaskManagerService {
-    String addTask(Task task);
-    String updateTask(Task task);
+    String addOrUpdateTask(Task task);
     List<Task> getTaskList();
-    String endTask(Task task);
 }

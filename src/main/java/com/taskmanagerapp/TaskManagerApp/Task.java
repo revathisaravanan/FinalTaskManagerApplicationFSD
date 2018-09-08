@@ -25,20 +25,8 @@ public class Task implements Serializable {
         this.taskId = taskId;
     }
 
-   /* @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Parent_ID")
-    private ParentTask parentTask;
-
-    public ParentTask getParentTask() {
-        return parentTask;
-    }
-
-    public void setParentTask(ParentTask parentTask) {
-        this.parentTask = parentTask;
-    }*/
-
-   @Column(name = "ParentTask")
-   private String parentTask;
+    @Column(name = "ParentTask")
+    private String parentTask;
 
     public String getParentTask() {
         return parentTask;
@@ -102,15 +90,4 @@ public class Task implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-
-  /*  @Override
-    public boolean equals(Object o) {
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-       // return Objects.hash(taskId, taskName, parentTask, startDate, endDate);
-        return Objects.hash(taskId, taskName, startDate, endDate, priority);
-    }*/
 }
