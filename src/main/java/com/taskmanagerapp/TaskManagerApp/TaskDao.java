@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface TaskDao {
 
-    void addOrUpdateTask(Task task);
+    void addOrUpdateTask(TaskData task);
 
-    List<Task> getAllTask();
+    List<TaskData> getAllTask();
 
 }

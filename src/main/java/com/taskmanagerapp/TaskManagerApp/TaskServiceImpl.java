@@ -7,18 +7,18 @@ import java.util.List;
 
 @Service("TaskManagerService")
 
-public class TaskManagerServiceImpl implements TaskManagerService {
+public class TaskServiceImpl implements TaskService {
 
     @Autowired
     TaskDao taskDaoImpl;
 
-    public String addOrUpdateTask(Task task) {
-        taskDaoImpl.addOrUpdateTask(task);
+    public String addOrUpdateTask(TaskData taskData) {
+        taskDaoImpl.addOrUpdateTask(taskData);
         return "Added";
     }
 
-    public List<Task> getTaskList() {
-        List<Task> taskList;
+    public List<TaskData> getTaskList() {
+        List<TaskData> taskList;
         taskList = taskDaoImpl.getAllTask();
         return taskList;
     }

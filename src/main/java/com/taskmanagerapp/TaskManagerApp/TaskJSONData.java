@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Date;
 
 @JsonInclude
-public class TaskManagerJSON {
+public class TaskJSONData {
 
     private int taskId;
     private String taskName;

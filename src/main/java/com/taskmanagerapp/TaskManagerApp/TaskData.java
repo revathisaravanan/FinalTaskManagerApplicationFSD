@@ -10,7 +10,7 @@ import java.util.Objects;
 @Component
 @Entity
 @Table(name="tasktable")
-public class Task implements Serializable {
+public class TaskData implements Serializable {
 
     @Id
     @Column(name = "Task_ID")

@@ -18,26 +18,26 @@ public class TaskDaoImpl implements TaskDao{
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
-    public void addOrUpdateTask(Task task) {
+    public void addOrUpdateTask(TaskData taskData) {
         Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
         Transaction tx = session.beginTransaction();
         try {
-            session.saveOrUpdate(task);
+            session.saveOrUpdate(taskData);
         }catch (RuntimeException e) {
             session.close();
-            throw new RuntimeException("Exception occured in addOrMergeTask",e);
+            throw new RuntimeException("Exception occured in addOrUpdateTask",e);
         }finally{
             tx.commit();
         }
     }
 
-    public List<Task> getAllTask() {
+    public List<TaskData> getAllTask() {
         Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
-        List<Task> taskList = null;
+        List<TaskData> taskList = null;
         try{
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Task> query = criteriaBuilder.createQuery(Task.class);
-            Root<Task> root = query.from(Task.class);
+            CriteriaQuery<TaskData> query = criteriaBuilder.createQuery(TaskData.class);
+            Root<TaskData> root = query.from(TaskData.class);
             query.select(root);
             taskList = session.createQuery(query).getResultList();
 
